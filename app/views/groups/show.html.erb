@@ -1,0 +1,22 @@
+<h1>images</h1>
+
+  <ul>
+    <li><%= @group.name %></li>
+  </ul>
+
+<% @group.photos.each do |photo| %>
+<p>
+  <% fpath = "/photos/" + photo.filename %>
+  <%= image_tag fpath %>
+  <%= link_to "[del]", photo, method: :delete, data: { confirm: 'are you sure?' } %>
+</p>
+<% end %>
+
+<br />
+<%= form_for [@group, @group.photos.build] do |f| %>
+  <%= f.file_field :filename %>
+  <%= f.submit %>
+<% end %>
+
+<br />
+<%= link_to "[group list]", groups_path %>
